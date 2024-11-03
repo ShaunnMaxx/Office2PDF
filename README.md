@@ -1,2 +1,27 @@
-# Office2PDF
-This project provides a Python script that converts Word, Excel, and PowerPoint files to PDF format using the Microsoft Office COM interface. 
+# Word、Excel、PPT 转 PDF 转换程序
+
+## 项目简介
+
+- 该程序用于将指定文件夹中的 Word、Excel 和 PowerPoint 文件转换为 PDF 格式，并将生成的 PDF 文件存放在一个名为 `pdf` 的子文件夹中。程序依赖于 Microsoft Office 的 COM 组件，因此需要在运行该程序的计算机上安装 Office。
+
+## 使用方法
+
+1. **下载或克隆该项目**到本地计算机。
+2. 双击运行 Office2PDF.exe
+3. **输入目标文件路径**，例如，如果文件在当前工作目录下，可以直接按回车。
+4. 程序将开始转换，转换完成后生成的 PDF 文件将存储在 `pdf` 文件夹中。
+
+## 注意事项
+
+- 程序仅处理目标路径下的 Word、Excel 和 PowerPoint 文件，不包括子文件夹中的文件。
+- 若某些 PowerPoint 或 Excel 文件为空，程序会自动跳过这些文件并打印相应的错误信息。
+- 在转换 PowerPoint 文件时，可能会出现弹出窗口要求用户确认操作，若转换时间较长，请检查是否有等待确认的窗口。
+- 关闭应用程序时，可能需要等待十秒钟，请耐心等待。
+
+## 实现思路
+
+1. **文件归类**：程序首先扫描指定文件夹，识别出所有的 Word、Excel 和 PowerPoint 文件，并将其分类存储在不同的列表中。
+2. **创建 PDF 文件夹**：在目标路径下创建一个名为 `pdf` 的子文件夹，用于存放转换生成的 PDF 文件。
+3. **使用 COM 接口**：通过 `win32com.client` 库，打开相应的 Office 应用程序，利用其提供的功能将文件保存为 PDF 格式。
+4. **处理异常**：在转换过程中，程序会捕获异常，确保某个文件出错不会影响其他文件的处理。
+5. **资源管理**：在完成转换后，程序会关闭 Office 应用程序，并进行垃圾回收，以释放资源。
